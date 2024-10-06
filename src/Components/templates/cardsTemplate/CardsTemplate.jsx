@@ -10,8 +10,7 @@ const CardsTemplate = ({characters,
   order,
   setOrder,
   deletedCharacters,
-  setIdCharacter,
-  setDeletedCharacters}) => {
+  setIdCharacter}) => {
 
   const applyFilters = (status, species, gender) => {
     setFilters({ status, species, gender });
@@ -21,10 +20,6 @@ const CardsTemplate = ({characters,
     const sorted = [...characters].sort((a, b) => order === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
     setOrder(order);
     setCharacters(sorted);
-  };
-
-  const handleDelete = (id) => {
-    setDeletedCharacters([...deletedCharacters, id]);
   };
 
   const handleFavorite = (id) => {

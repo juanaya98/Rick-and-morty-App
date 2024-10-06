@@ -21,12 +21,23 @@ const Principal = () => {
       const charactersWithFavorite = data.results.map((character) => ({
         ...character,
         favorite: false,
+        comments: [],
       }));
 
       setCharacters(charactersWithFavorite);
     };
     fetchCharacters();
   }, []);
+
+  const handleAddComment = (id, newComment) => {
+    setCharacters((prevCharacters) =>
+      prevCharacters.map((character) =>
+        character.id === id
+          ? { ...character, comments: [...character.comments, newComment] }
+          : character
+      )
+    );
+  };
 
   return (
     <div>
@@ -57,6 +68,7 @@ const Principal = () => {
               deletedCharacters={deletedCharacters}
               setDeletedCharacters={setDeletedCharacters}
               idCharacter={idCharacter}
+              handleAddComment={handleAddComment}
             />
           )}
         </div>
