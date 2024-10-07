@@ -22,6 +22,7 @@ const Principal = () => {
         ...character,
         favorite: false,
         comments: [],
+        deleted: false,
       }));
 
       setCharacters(charactersWithFavorite);
@@ -68,6 +69,7 @@ const Principal = () => {
               deletedCharacters={deletedCharacters}
               setDeletedCharacters={setDeletedCharacters}
               idCharacter={idCharacter}
+              setIdCharacter={setIdCharacter}
               handleAddComment={handleAddComment}
             />
           )}

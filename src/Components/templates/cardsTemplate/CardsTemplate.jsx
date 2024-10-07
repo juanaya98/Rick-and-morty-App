@@ -44,10 +44,11 @@ const CardsTemplate = ({characters,
         <Button label="Sort Z-A" onClick={() => handleSort('desc')} />
       </div>
       <div>
-        <h1 className='text-neutral-500 px-10'>Starred Characters({characters.filter(character => character.favorite ).length})</h1>
+        <h1 className='text-neutral-500 px-10'>Starred Characters({characters.filter(character => character.favorite && !character.deleted).length})</h1>
       <div className="grid grid-rows-1 gap-4">
         {characters
           .filter(character => !deletedCharacters.includes(character.id))
+          .filter(character => !character.deleted)
           .filter(character => 
             (filters.status ? character.status === filters.status : true) &&
             (filters.species ? character.species === filters.species : true) &&
@@ -60,10 +61,11 @@ const CardsTemplate = ({characters,
       </div>
       </div>
       <div> 
-        <h1 className='text-neutral-500 px-10 py-6'>characters({characters.filter(character => character.favorite === false ).length})</h1>
+        <h1 className='text-neutral-500 px-10 py-6'>characters({characters.filter(character => !character.favorite && !character.deleted).length})</h1>
       <div className="grid grid-rows-1 gap-4">
         {characters
           .filter(character => !deletedCharacters.includes(character.id))
+          .filter(character => !character.deleted)
           .filter(character => 
             (filters.status ? character.status === filters.status : true) &&
             (filters.species ? character.species === filters.species : true) &&

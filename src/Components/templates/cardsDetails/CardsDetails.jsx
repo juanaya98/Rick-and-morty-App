@@ -1,21 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../basics/Button";
 
 const CardsDetails = ({
   characters,
   setCharacters,
   idCharacter,
-  handleAddComment
+  handleAddComment,
+  setIdCharacter,
 }) => {
   const [newComment, setNewComment] = useState("");
-
   const character = characters.find((char) => char.id === idCharacter) || characters[0];
+
+  useEffect(() => {
+    if (!character || character.deleted) {
+      const nextCharacter = characters.find((char) => !char.deleted) || characters[0];
+      setIdCharacter(nextCharacter?.id || 0);
+    }
+  }, [character, characters, setIdCharacter]);
+  
 
   const onSubmitComment = () => {
     if (newComment.trim()) {
       handleAddComment(character.id, newComment);
       setNewComment(""); 
     }
+  };
+
+  const handleSoftDelete = (id) => {
+    
+    setCharacters((prevCharacters) =>
+      prevCharacters.map((character) =>
+        character.id === id ? { ...character, deleted: true } : character
+      )
+    );
   };
 
   return (
@@ -56,6 +73,11 @@ const CardsDetails = ({
         onClick={onSubmitComment}
         className="bg-blue-500 text-white h-10 w-40 mt-4"
       />
+      <Button
+          label="Delete Character"
+          onClick={() => handleSoftDelete(character.id)} 
+          className="bg-red-500 text-white h-10 w-40 mt-4"
+        />
     </div>
   );
 };
