@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CardCharacter from '../../collections/cardCharacter/CardCharacter';
 import Filter from '../../collections/filter/Filter';
 import Button from '../../basics/Button'
@@ -26,7 +26,7 @@ const CardsTemplate = ({characters,
     setCharacters((prevCharacters) =>
       prevCharacters.map((character) =>
         character.id === id
-          ? { ...character, favorite: !character.favorite } // Alterna el estado
+          ? { ...character, favorite: !character.favorite } 
           : character
       )
     );
@@ -60,7 +60,7 @@ const CardsTemplate = ({characters,
       </div>
       </div>
       <div> 
-        <h1 className='text-neutral-500 px-10'>characters({characters.filter(character => character.favorite === false ).length})</h1>
+        <h1 className='text-neutral-500 px-10 py-6'>characters({characters.filter(character => character.favorite === false ).length})</h1>
       <div className="grid grid-rows-1 gap-4">
         {characters
           .filter(character => !deletedCharacters.includes(character.id))
